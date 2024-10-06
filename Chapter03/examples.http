@@ -1,4 +1,5 @@
-@host = 40.127.210.206
+# 40.127.210.206
+@host = localhost 
 @port=5000
 
 @user={{$randomInt 1 1000}}
