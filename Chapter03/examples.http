@@ -1,11 +1,12 @@
 # 40.127.210.206
 @host = localhost 
-@port=5000
+@port=5001
 
-@user={{$randomInt 1 1000}}
+@user=1
+#{{$randomInt 1 1000}}
 
 ###
-GET http://{{host}}:{{port}}/shoppingcart/{{user}}
+GET https://{{host}}:{{port}}/shoppingcart/{{user}}
 
 ####
 POST http://{{host}}:{{port}}/shoppingcart/{{user}}/items
