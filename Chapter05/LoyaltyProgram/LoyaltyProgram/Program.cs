@@ -1,12 +1,28 @@
-  using LoyaltyProgram;
-  using Microsoft.AspNetCore.Hosting;
-  using Microsoft.Extensions.Hosting;
-  using Microsoft.Extensions.Logging;
 
-  CreateHostBuilder(args).Build().Run();
+  WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-  static IHostBuilder CreateHostBuilder(string[] args) =>
-    Host.CreateDefaultBuilder(args)
-      .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); })
-      .ConfigureLogging(builder => builder.SetMinimumLevel(LogLevel.Trace));
+// Add builder.Services to the container
+  ConfigureServices(builder);
+  WebApplication application = builder.Build();
+
+// Configure the HTTP request pipeline
+  ConfigureMiddleware(application);
+  await application.RunAsync();
+
+
+
+  void ConfigureServices(WebApplicationBuilder webApplicationBuilder)
+    { 
+      webApplicationBuilder.Services.AddControllers();
+  }
+
+
+  void ConfigureMiddleware(WebApplication app)
+  {
+      app.UseHttpsRedirection();
+      app.UseRouting();
+
+      app.MapControllers();
+      app.UseRewriter();
+  }
 
