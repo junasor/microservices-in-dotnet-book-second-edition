@@ -1,7 +1,6 @@
 using Polly;
 using ShoppingCart;
 
-
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add builder.Services to the container
@@ -32,8 +31,6 @@ void ConfigureServices(WebApplicationBuilder webApplicationBuilder)
 
 void ConfigureMiddleware(WebApplication app)
 {
-
-
     app.UseHttpsRedirection();
     app.UseRouting();
 

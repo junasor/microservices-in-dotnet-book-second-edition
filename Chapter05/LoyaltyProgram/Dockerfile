@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 COPY . .
 RUN dotnet restore "LoyaltyProgram/LoyaltyProgram.csproj"
@@ -14,7 +14,7 @@ RUN dotnet publish "LoyaltyProgram.csproj" -c Release -o /api/publish
 WORKDIR "/src/EventConsumer"
 RUN dotnet publish "EventConsumer.csproj" -c Release -o /consumer/publish
 
-FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS final
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
 EXPOSE 80
 COPY --from=publish /api/publish ./api

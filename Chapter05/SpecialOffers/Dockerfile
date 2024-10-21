@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 COPY . .
 RUN dotnet restore "SpecialOffers.csproj"
@@ -9,7 +9,7 @@ FROM build AS publish
 WORKDIR "/src"
 RUN dotnet publish "SpecialOffers.csproj" -c Release -o /api/publish
 
-FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS final
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
 EXPOSE 80
 COPY --from=publish /api/publish ./api
